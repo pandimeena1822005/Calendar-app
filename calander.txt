@@ -1,0 +1,58 @@
+import calendar
+
+# Function to display the calendar
+def display_calendar(year, month):
+    # Using calendar module to generate calendar for given year and month
+    cal = calendar.month(year, month)
+    print("Calendar:")
+    print(cal)
+
+# Function to add an event to the calendar
+def add_event(calendar_events, date, event):
+    if date in calendar_events:
+        calendar_events[date].append(event)
+    else:
+        calendar_events[date] = [event]
+
+# Function to view events for a specific date
+def view_events(calendar_events, date):
+    if date in calendar_events:
+        print("Events for {}: {}".format(date, ", ".join(calendar_events[date])))
+    else:
+        print("No events found for", date)
+
+def main():
+    calendar_events = {}
+    while True:
+        print("\nOptions:")
+        print("1. Display Calendar")
+        print("2. Add Event")
+        print("3. View Events for a Date")
+        print("4. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            year = int(input("Enter year: "))
+            month = int(input("Enter month: "))
+            display_calendar(year, month)
+
+        elif choice == '2':
+            date = input("Enter date (YYYY-MM-DD): ")
+            event = input("Enter event: ")
+            add_event(calendar_events, date, event)
+            print("Event added successfully!")
+
+        elif choice == '3':
+            date = input("Enter date to view events (YYYY-MM-DD): ")
+            view_events(calendar_events, date)
+
+        elif choice == '4':
+            print("Exiting program...")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
